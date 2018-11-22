@@ -1,0 +1,177 @@
+Kit format
+1536 bytes long
+
+Checksum calc:
+Header
+fixed KITH text
+00N,01N,02N,03N,04N,05(causes reset),06N,07N,08=checksum,09N,0aY,0bY,0cY,0dY,0eY,0fY
+10Y,11Y,12Y,13Y,14Y,15Y,16Y,17Y,18Y,19Y,1aY,1bY,1cY,1dY,1eY,1fY
+20Y,21Y,22Y,23Y,24Y,25Y,26Y,27Y,28Y,29Y,2aY,2bY,2cY,2dY,2eY,2fY
+30Y,31Y,32Y,33Y,34Y,35Y,36Y,37Y,38Y,39Y,3aY,3bY,3cY,3dY,3eY,3fY
+40Y,41Y,42Y,43Y,44Y,45Y,46Y,47Y,48Y,49Y,4aY,4bY,4cY,4dY,4eY,4fY
+50Y,51Y,52Y,53Y,54Y,55Y,56Y,57Y,58Y,59Y,5aY,5bY,5cY,5dY,5eY,5fY
+60Y,61Y,62Y,63Y,64Y,65Y,66Y,67Y,68Y,69Y,6aY,6bY,6cY,6dY,6eY,6fY
+70Y,71Y,72Y,73Y,74Y,75Y,76Y,77Y,78Y,79Y,7aY,7bY,7cY,7dY,7eY,7fY
+
+Internal Block
+80Y,81Y,82Y,83Y,84Y,85Y,86Y,87Y,88Y,89Y,8aY,8bY,8cY,8dY,8eY,8fY
+90Y,91Y,92Y,93Y,94Y,95Y,96Y,97Y,98Y,99Y,9aY,9bY,9cY,9dY,9eY,9fY
+a0Y,a1Y,a2Y,a3Y,a4Y,a5Y,a6Y,a7Y,a8Y,a9Y,aaY,abY,acY,adY,aeY,afY
+b0Y,b1Y,b2Y,b3Y,b4Y,b5Y,b6Y,b7Y,b8Y,b9Y,baY,bbY,bcY,bdY,beY,bfY
+c0Y,c1Y,c2Y,c3Y,c4Y,c5Y,c6Y,c7Y,c8Y,c9Y,caY,cbY,ccY,cdY,ceY,cfY
+d0Y,d1Y,d2Y,d3Y,d4Y,d5Y,d6Y,d7Y
+
+22f x
+22e x
+22d x
+
+1df
+
+External block
+
+
+
+
+
+
+
+header 128 bytes long
+
+Header:
+       00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+0000   4B 49 54 48 80 00 00 00 99 00 08 08 00 20 00 20 
+0010   00 00 00 03 00 10 00 20 00 00 00 00 00 00 0C 18 
+0020   00 00 0C 18 00 00 0C 18 00 00 0C 18 00 00 0C 18 
+0030   00 00 0C 18 00 00 0C 18 00 00 00 00 00 00 00 00 
+0040   00 00 00 00 00 00 00 00 4B 49 54 30 30 31 00 00 
+0050   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+0060   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+0070   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+KITH€...™.... . 
+....... ........
+................
+................
+........KIT001..
+................
+................
+................
+
+00 : KITH€
+08 : 8bit Checksum of byte 9 to byte 555
+
+			for(int i=9;i<556;i++)
+			{
+				outThing=outThing+inData[i]&0xff;
+				outThing=outThing&0xff;
+			}
+48 : KITxxx
+
+8 'internal' blocks
+88 bytes each
+
+       00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+
+0000   4B 49 54 49 50 00 00 00 00 00 00 00 00 00 00 08 
+0010   38 30 38 20 4B 69 63 6B 00 00 00 00 00 00 00 00 
+0020   00 00 00 15 00 06 00 00 00 0A 00 20 01 04 08 10 
+0030   02 04 08 10 03 00 00 20 08 24 00 7F 09 00 00 03 
+0040   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+0050   00 00 00 00 00 00 00 00
+
+KITIP...........
+808 Kick........
+........... ....
+....... .$......
+................
+........
+00 - KITIP
+07 - internal/external/active flag, values: 0=internal, 1=external
+0f - length of name
+10 - name (up to 8 chars)
+23 - 15
+25 - 06
+29 - volume, values: 0 to 0a
+2b - 20
+2c - 01
+2d - tune, values: 0 to 8 (-4 to +4)
+2e - 08
+2f - 10
+30 - 02
+31 - pan , values: 0 to 8 (L4,L3,L2,L1,Center,R1,R2,R3,R4)
+32 - 08
+33 - 10
+34 - 03
+35 - trigger, values: 0 = One Shot, 1=hold, 2=loop
+37 - 20
+38 - 08
+39 - midi note, values: 0 to 7f
+3b - 7f
+3c - 09
+3f - reverb, values: 0 to 0a 
+
+
+8 'user sample' blocks
+       00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+0000   4B 49 54 49 50 00 00 00 FF AA 00 00 00 00 00 08 
+0010   3C 45 6D 70 74 79 3E 20 00 00 00 00 00 00 00 00 
+0020   00 00 01 00 00 06 00 00 00 0A 00 20 01 04 08 10 
+0030   02 04 08 10 03 00 00 20 08 40 00 7F 09 02 00 03 
+0040   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+0050   00 00 00 00 00 00 00 00
+
+
+KITIP...ÿª......
+<Empty> ........
+........... ....
+....... .@......
+................
+........
+
+       00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f
+0000   4B 49 54 49 50 00 00 01 AA AA 00 00 00 00 00 08 
+0010   50 44 42 5F 31 37 7E 31 00 00 00 00 00 00 00 00 
+0020   00 00 01 00 00 06 00 00 00 0A 00 20 01 04 08 10 
+0030   02 04 08 10 03 00 00 20 08 24 00 7F 09 00 00 03 
+0040   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+0050   00 00 00 00 00 00 00 00
+
+
+KITIP...ªª......
+PDB_17~1........
+........... ....
+....... .$......
+................
+........
+
+00 - KITIP
+07 - internal/external/active flag, values: 0=internal, 1=external
+08 - active, values: ff or aa (ff - inactive, aa - active)
+0f - length of name
+10 - name (up to 8 chars)
+22 - 01
+25 - 06
+29 - volume, values: 0 to 0a
+2b - 20
+2c - 01
+2d - tune, values: 0 to 8 (-4 to +4)
+2e - 08
+2f - 10
+30 - 02
+31 - pan , values: 0 to 8 (L3,L3,L2,L1,Center,R1,R2,R3,R4)
+32 - 08
+33 - 10
+34 - 03
+35 - trigger, values: 0 = One Shot, 1=hold, 2=loop
+36 - 00
+37 - 20
+38 - 08
+39 - midi note, values: 0 to 7f
+3b - 7f
+3c - 09
+3f - reverb, values: 0 to 0a 
+
+AC
+
+4e
